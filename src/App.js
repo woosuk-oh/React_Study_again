@@ -39,16 +39,25 @@ class App extends Component {
 
     componentDidMount() {
         setTimeout(() => {
-            //this.state.greeting = 'something' //Do not mutate state directly. Use setState()
             this.setState({
-                greeting: 'hello again!'
+                movies: [
+                    ...this.state.movies, // three dot. 스프레드 속성으로, 마운트 된 (렌더링 1회) 이후 -> 마운트 되기 전의 state에서 movies로 정의해놓은 오브젝트를 불러와서 -> movies에 추가 -> setState해준다.
+                    //this.state.movies, // ->
+                    {
+                        title:"Trainspotting",
+                        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSv9lGgMvpMRSoihTZ9o3amizgbHRHStBuyA3WhkZXg0AKQVT2AQItxzg"
+                    }
+
+                ]
+
             })
-        }, 5000)
+        },5000)
     }
 
     render() {
         return (
             <div className="App">
+                
                 {
                     this.state.movies.map((movie, idx) => {
                         return <Movie title={movie.title} poster={movie.poster} key={idx}/>;
