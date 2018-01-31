@@ -1,3 +1,4 @@
+/*
 import React, {Component} from 'react';
 // eslint-disable-next-line
 import PropTypes from 'prop-types';
@@ -19,3 +20,4 @@ MoviePoster.propTypes = {
 MoviePoster.defaultProps = {};
 
 export default MoviePoster;
+*/
