@@ -9,59 +9,40 @@ class App extends Component {
     //Render: componentWillMount() -> render() -> componentDidMount()
     //Update: componentWillReceiveProps() -> shouldComponentUpdate() -> componentWillUpdate() -> render() -> component
 
-/*
-
-    constructor(props){
-        super(props);
-
-        this.state = {
-            greeting: 'Hello!'
-        }
-    }
-
-*/
-
     state = {
         greeting: 'Hello'
     }
 
 
-
-
-
     componentDidMount() {
-        setTimeout(() => {
-            this.setState({
-                movies: [
-                    {
-                        title: 'Oldboy',
-                        poster: 'http://image.cine21.com/cine21/poster/2013/1114/10_42_00__52842a68c7fda.jpg'
 
-                    },
-                    {
-                        title: 'Star Wars',
-                        poster: 'http://t1.daumcdn.net/movie/469c5c4957bee98cabe85e04e630f174dc0b7670'
+       // console.log(fetch('https://yts.am/api/v2/list_movies.json?sort_by=rating'));
 
-                    },
-                    {
-                        title: 'Full Metal Jacket',
-                        poster: 'http://image.cine21.com/cine21/poster/2005/0607/M0010102_.jpg'
+        fetch('https://yts.am/api/v2/list_movies.json?sort_by=rating')
+            .then(data => data.json())
+            .then(json => console.log(json))
+            .catch(err => console.log(err))
 
-                    },
-                    {
-                        title: 'Matrix',
-                        poster: 'https://lh3.googleusercontent.com/TQp6Lb2rArWLcWaUkXyBfecjm8DWrk00rbpU_Z5h3Xe6RNC2Oc3QfHCTi96tud31urnYUeK027Ft'
+//자바스크립트 컨셉인 promise 사용 (fetch 후에 .then으로 case 관리)(Async)
 
-                    },
-                    {
-                        title: "Trainspotting",
-                        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSv9lGgMvpMRSoihTZ9o3amizgbHRHStBuyA3WhkZXg0AKQVT2AQItxzg"
-                    }
-                ]
 
-            })
-        }, 5000)
-    };
+
+        /**   AJAX 사용
+         *
+         * Modern JavaScript 사용하여 AJAX를 fetch로 간단하게 사용가능. (fetch란 무언가를 집어온다는 뜻)
+
+         AJAX란?
+         URL을 JavaScript로 Asynchronous(비동기) 방법으로 불러옴. and XML
+         (xml 방식으로, 그러나 요새는 XML을 안쓰고 JSON 방식으로 쓰므로, 정확히 말하면 'AJAX'가 아닌 'AJAJ' 이다.)
+
+
+         AJAX 사용 이유
+         1. 사용하기 간단 (fetch)
+         2. React와 연계하여 사용하면 불러올때마다 새로고침을 하지 않아도 된다.
+         3. ( 로딩과 동시에 API와 평점을 불러온다..), **/
+
+
+    }
 
     _renderMoives = () => { // = () => 는 ES6 문법
         // 언더바 쓰는 이유는 React 기본 펑션과 내가 작성한 펑션 차이 두기 위함.
@@ -77,7 +58,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                {this.state.movies ? this._renderMoives():'Loading...'}
+                {this.state.movies ? this._renderMoives() : 'Loading...'}
                 {/* movies가 불려지지 않았으면 Loading 문구 출력, movies 불려졌으면 movies 타이틀과 poster 출력*/}
             </div>
         );
