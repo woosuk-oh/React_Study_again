@@ -64,7 +64,7 @@ class App extends Component {
 
     }
     _callApi = () => {
-       return fetch('https://yts.am/api/v2/list_movies.json?sort_by=rating')
+       return fetch('https://yts.am/api/v2/list_movies.json?sort_by=download_count')
             .then(data => data.json())
             .then(json => json.data.movies)
             .catch(err => console.log(err))
@@ -72,9 +72,11 @@ class App extends Component {
 
 
     render() {
+        const {movies}= this.state;
+
         return (
-            <div className="App">
-                {this.state.movies ? this._renderMoives() : 'Loading...'}
+            <div className={movies ? "App":"App-Loading"}>
+                {movies ? this._renderMoives() : 'Loading...'}
                 {/* movies가 불려지지 않았으면 Loading 문구 출력, movies 불려졌으면 movies 타이틀과 poster 출력*/}
             </div>
         );
