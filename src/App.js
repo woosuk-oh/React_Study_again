@@ -16,18 +16,9 @@ class App extends Component {
 
     componentDidMount() {
 
-       // console.log(fetch('https://yts.am/api/v2/list_movies.json?sort_by=rating'));
 
-        fetch('https://yts.am/api/v2/list_movies.json?sort_by=rating')
-            .then(data => data.json())
-            .then(json =>
-                this.setState({
-                    moives: json.data.movies
-                }))
-            .catch(err => console.log(err))
-
-//자바스크립트 컨셉인 fetch라는 promise 사용 (fetch 후에 .then으로 case 관리)(Async)
-
+        this._getMovies();
+        //많은 function을 불러올건데, 한군데 모여있는것 보다는 작은 사이즈로 나뉘어져 있는것이 좋음.
 
 
         /**   AJAX 사용
@@ -51,11 +42,28 @@ class App extends Component {
         // 언더바 쓰는 이유는 React 기본 펑션과 내가 작성한 펑션 차이 두기 위함.
 
         const movies =
-            this.state.movies.map((movie, idx) => {
-                return <Movie title={movie.title} poster={movie.poster} key={idx}/>;
+            this.state.movies.map(movie => { // 컴포넌트의 key는 인덱스를 사용x. 느림.
+                //console.log(movie)
+                return <Movie title={movie.title} poster={movie.medium_cover_image} key={movie.id}/>;
             })
         return movies;
     };
+
+     _getMovies = async () => {
+        const movies = await this._callApi();
+        //callApi가 끝나길 기다리고 return값을 movies에 set함.
+        // 위에서 moveis에 set된 후 밑에서 setState 실행.
+        this.setState({
+            movies: movies
+        })
+
+    }
+    _callApi = () => {
+       return fetch('https://yts.am/api/v2/list_movies.json?sort_by=rating')
+            .then(data => data.json())
+            .then(json => json.data.movies)
+            .catch(err => console.log(err))
+    }
 
 
     render() {
@@ -69,14 +77,3 @@ class App extends Component {
 }
 
 export default App;
-
-
-/*const movieTitle = [
-    "Oldboy",
-    "Star Wars",
-    "Full Metal Jackets",
-    "Matrix"
-
-]
-
-const movieImages = []*/
