@@ -43,8 +43,13 @@ class App extends Component {
 
         const movies =
             this.state.movies.map(movie => { // 컴포넌트의 key는 인덱스를 사용x. 느림.
-                //console.log(movie)
-                return <Movie title={movie.title} poster={movie.medium_cover_image} key={movie.id}/>;
+                console.log(movie)
+                return <Movie
+                    title={movie.title}
+                    poster={movie.medium_cover_image}
+                    genres={movie.genres}
+                    synopsis={movie.synopsis}
+                    key={movie.id}/>;
             })
         return movies;
     };
