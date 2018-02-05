@@ -20,10 +20,13 @@ class App extends Component {
 
         fetch('https://yts.am/api/v2/list_movies.json?sort_by=rating')
             .then(data => data.json())
-            .then(json => console.log(json))
+            .then(json =>
+                this.setState({
+                    moives: json.data.movies
+                }))
             .catch(err => console.log(err))
 
-//자바스크립트 컨셉인 promise 사용 (fetch 후에 .then으로 case 관리)(Async)
+//자바스크립트 컨셉인 fetch라는 promise 사용 (fetch 후에 .then으로 case 관리)(Async)
 
 
 
