@@ -54,7 +54,8 @@ class App extends Component {
         return movies;
     };
 
-     _getMovies = async () => {
+
+    _getMovies = async () => {
         const movies = await this._callApi();
         //callApi가 끝나길 기다리고 return값을 movies에 set함.
         // 위에서 moveis에 set된 후 밑에서 setState 실행.
@@ -64,7 +65,7 @@ class App extends Component {
 
     }
     _callApi = () => {
-       return fetch('https://yts.am/api/v2/list_movies.json?sort_by=download_count')
+        return fetch('https://yts.am/api/v2/list_movies.json?sort_by=download_count')
             .then(data => data.json())
             .then(json => json.data.movies)
             .catch(err => console.log(err))
@@ -72,12 +73,15 @@ class App extends Component {
 
 
     render() {
-        const {movies}= this.state;
+        const {movies} = this.state;
 
         return (
-            <div className={movies ? "App":"App-Loading"}>
+            <div className={movies ? "App" : "App-Loading"}>
                 {movies ? this._renderMoives() : 'Loading...'}
                 {/* movies가 불려지지 않았으면 Loading 문구 출력, movies 불려졌으면 movies 타이틀과 poster 출력*/}
+
+
+
             </div>
         );
     }
