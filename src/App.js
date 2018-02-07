@@ -76,7 +76,7 @@ class App extends Component {
         const {movies} = this.state;
 
         return (
-            <div className={movies ? "App" : "App-Loading"}>
+            <div className={movies ? "App" : "App--Loading"}>
                 {movies ? this._renderMoives() : 'Loading...'}
                 {/* movies가 불려지지 않았으면 Loading 문구 출력, movies 불려졌으면 movies 타이틀과 poster 출력*/}
 
